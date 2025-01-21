@@ -35,7 +35,7 @@ public class Placementindicator : MonoBehaviour
 
         {
             transform.position = hits[0].pose.position;
-            transform.position = hits[0].pose.rotation;
+            transform.rotation = hits[0].pose.rotation;
             // enable the visual if it's disabled
 
             if (!visual.activeInHierarchy)
