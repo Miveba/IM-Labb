@@ -1,9 +1,11 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RaycastForward : MonoBehaviour
 {
     public Transform startObject;
-    public float rayDistance = 5f; 
+    public float rayDistance = 5f;
 
     void Update()
     {
@@ -15,7 +17,7 @@ public class RaycastForward : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            Debug.Log("Raycast träffade: " + hit.collider.gameObject.name);
+            Debug.Log("Raycast träffade" + hit.collider.gameObject.name);
         }
     }
 }
