@@ -1163,6 +1163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 100
+  hitSound: {fileID: 0}
+  volume: 0
 --- !u!1 &1062271203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,6 +2048,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 100
+  hitSound: {fileID: 8300000, guid: 3643feb85c6467449874a06cbe17cd24, type: 3}
+  volume: 10
 --- !u!4 &1562208049
 Transform:
   m_ObjectHideFlags: 0

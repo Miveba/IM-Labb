@@ -1,41 +1,57 @@
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
+using UnityEngine.Audio;
 
 public class Touch : MonoBehaviour
 {
     public float force = 100f;
-    // Update is called once per frame
+    public AudioClip hitSound; // Assign this in the Inspector
+    private AudioSource audioSource;
+
+    public float volume;
+
+    void Start()
+    {
+        // Add an AudioSource component if not already present
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+    }
     void Update()
     {
-        
-            if (Input.GetMouseButtonDown(0)) // Vänster musknapp
+
+        if (Input.GetMouseButtonDown(0)) // Vänster musknapp
+        {
+            // Skapa en ray från muspositionen
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // Håll en träffinformation
+            RaycastHit hit;
+
+            // Utför raycasten
+            if (Physics.Raycast(ray, out hit))
             {
-                // Skapa en ray från muspositionen
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                // Logga träffobjektet
+                Debug.Log("Hit object: " + hit.collider.name);
 
-                // Håll en träffinformation
-                RaycastHit hit;
+                // Exempel: Rita ett streck från rayens start till träffpunkten
+                Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
 
-                // Utför raycasten
-                if (Physics.Raycast(ray, out hit))
+                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+                if (rb != null)
                 {
-                    // Logga träffobjektet
-                    Debug.Log("Hit object: " + hit.collider.name);
+                    rb.AddForce(ray.direction * force);
 
-                    // Exempel: Rita ett streck från rayens start till träffpunkten
-                    Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
-
-                  Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-
-                    if(rb != null )
+                    if (hitSound != null && audioSource != null)
                     {
-                        rb.AddForce(ray.direction * force); 
+                        audioSource.PlayOneShot(hitSound);
                     }
+
                 }
+
             }
-     
+        }
+
     }
-        
+
 
 }
