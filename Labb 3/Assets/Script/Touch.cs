@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -47,22 +43,11 @@ public class Touch : MonoBehaviour
 
                     if (hitSound != null && audioSource != null)
                     {
-<<<<<<< Updated upstream
-=======
-                        rb.AddForce(ray.direction * force);
-
-                    if (hitSound != null && audioSource != null)
-                    {
->>>>>>> Stashed changes
                         audioSource.PlayOneShot(hitSound);
                     }
 
                 }
 
-<<<<<<< Updated upstream
-=======
-            }
->>>>>>> Stashed changes
             }
         }
 
