@@ -17,7 +17,6 @@ public class FallSound : MonoBehaviour
         {
             audioSource.Play();
             Debug.Log("Lådan träffade marken!");
-
         }
     }
 }
