@@ -29,6 +29,17 @@ public class CarManager : MonoBehaviour
     public DrivingSurfaceManager DrivingSurfaceManager;
 
     public CarBehaviour Car;
+    public AudioClip hitSound; // Assign this in the Inspector
+    private AudioSource audioSource;
+
+    public float volume;
+
+    void Start()
+    {
+        // Add an AudioSource component if not already present
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+    }
 
     private void Update()
     {
@@ -40,6 +51,11 @@ public class CarManager : MonoBehaviour
             Car.Reticle = Reticle;
             Car.transform.position = Reticle.transform.position;
             DrivingSurfaceManager.LockPlane(Reticle.CurrentPlane);
+            if (hitSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(hitSound);
+            }
+ 
         }
     }
 

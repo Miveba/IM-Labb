@@ -931,6 +931,8 @@ MonoBehaviour:
   Reticle: {fileID: 1386003928}
   DrivingSurfaceManager: {fileID: 1310676629}
   Car: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: b57f685a8a09a52428d8278918c09513, type: 3}
+  volume: 10
 --- !u!4 &1603286313
 Transform:
   m_ObjectHideFlags: 0

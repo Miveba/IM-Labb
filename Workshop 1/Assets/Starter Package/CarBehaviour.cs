@@ -26,6 +26,16 @@ public class CarBehaviour : MonoBehaviour
     public ReticleBehaviour Reticle;
     public float Speed = 1.2f;
     public float force = 100;
+    public AudioClip hitSound; // Assign this in the Inspector
+    private AudioSource audioSource;
+    public float volume;
+
+    void Start()
+    {
+        // Add an AudioSource component if not already present
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+    }
 
     private void Update()
     {
@@ -57,6 +67,10 @@ public class CarBehaviour : MonoBehaviour
         if (Package != null)
         {
             Destroy(other.gameObject, 2f);
+        }
+        if (hitSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hitSound, 2f);
         }
     }
 }
