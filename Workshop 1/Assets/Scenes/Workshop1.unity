@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf702359e39524bf1a5658bfc76c2be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ARCameraManager: {fileID: 0}
+  ARCameraManager: {fileID: 1592190672}
   Light: {fileID: 0}
 --- !u!1 &1592190668
 GameObject:
