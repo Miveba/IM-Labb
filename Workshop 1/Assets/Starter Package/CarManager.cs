@@ -53,7 +53,9 @@ public class CarManager : MonoBehaviour
             DrivingSurfaceManager.LockPlane(Reticle.CurrentPlane);
             if (hitSound != null && audioSource != null)
             {
-                audioSource.PlayOneShot(hitSound);
+                audioSource.clip = hitSound;
+                audioSource.loop = true;
+                audioSource.Play();
             }
  
         }
