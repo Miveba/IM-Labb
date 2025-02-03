@@ -25,7 +25,7 @@ public class CarBehaviour : MonoBehaviour
 {
     public ReticleBehaviour Reticle;
     public float Speed = 1.2f;
-    public float force = 2;
+    public float force = 100;
 
     private void Update()
     {
