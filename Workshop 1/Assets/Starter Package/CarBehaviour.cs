@@ -16,6 +16,7 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 /**
  * Our car will track a reticle and collide with a <see cref="PackageBehaviour"/>.
@@ -24,6 +25,7 @@ public class CarBehaviour : MonoBehaviour
 {
     public ReticleBehaviour Reticle;
     public float Speed = 1.2f;
+    public float force = 2;
 
     private void Update()
     {
@@ -43,9 +45,18 @@ public class CarBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var Package = other.GetComponent<PackageBehaviour>();
+
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            Vector3 pushDirection = transform.forward;
+            rb.AddForce(pushDirection * force);
+        }
+
         if (Package != null)
         {
-            Destroy(other.gameObject);
+            Destroy(other.gameObject, 2f);
         }
     }
 }
