@@ -27,6 +27,7 @@ public class MonsterSpawner : MonoBehaviour
 
 
 
+
     public static Vector3 RandomInTriangle(Vector3 v1, Vector3 v2)
     {
         float u = Random.Range(0.0f, 1.0f); 
@@ -64,11 +65,9 @@ public class MonsterSpawner : MonoBehaviour
 
     private void Update()
     {
-       
         var lockedPlane = DrivingSurfaceManager.LockedPlane;
         if (lockedPlane != null)
         {
-           
             if (Package == null)
             {
                 SpawnPackage(lockedPlane);
@@ -78,6 +77,5 @@ public class MonsterSpawner : MonoBehaviour
             packagePosition.Set(packagePosition.x, lockedPlane.center.y, packagePosition.z);
         }
     }
-
 }
 

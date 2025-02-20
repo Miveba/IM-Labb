@@ -30,7 +30,6 @@ public class DrivingSurfaceManager : MonoBehaviour
     {
         // Disable all planes except the one we want to keep
         var arPlane = keepPlane.GetComponent<ARPlane>();
-        Debug.Log("Found");
         foreach (var plane in PlaneManager.trackables)
         {
             if (plane != arPlane)
