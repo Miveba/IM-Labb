@@ -38,6 +38,41 @@ public class ReticleBehaviour : MonoBehaviour
 
     private void Update()
     {
-        // TODO: Conduct a ray cast to position this object.
+        // Hitta mitten av skärmen
+        var screenCenter = new Vector3(0.5f, 0.5f);
+        var screenPosition = Camera.main.ViewportToScreenPoint(screenCenter);
+
+        // Utför raycast för att hitta en yta
+        var hits = new List<ARRaycastHit>();
+        DrivingSurfaceManager.RaycastManager.Raycast(screenPosition, hits, TrackableType.PlaneWithinBounds);
+
+        CurrentPlane = null;
+        ARRaycastHit? hit = null;
+
+        if (hits.Count > 0)
+        {
+            var lockedPlane = DrivingSurfaceManager.LockedPlane;
+            hit = lockedPlane == null
+                ? hits[0]
+                : hits.SingleOrDefault(x => x.trackableId == lockedPlane.trackableId);
+        }
+
+        if (hit.HasValue)
+        {
+            CurrentPlane = DrivingSurfaceManager.PlaneManager.GetPlane(hit.Value.trackableId);
+            transform.position = hit.Value.pose.position; // Flytta retikeln till ytan
+        }
+
+        // 🟢 Håll Child-objektet alltid framför kameran i rätt riktning
+        float distance = 2.0f; // Justera om nödvändigt
+        Child.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
+
+        // 🟢 Se till att retikeln alltid är vänd framåt
+        Child.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward, Vector3.up);
+
+        // Se till att retikeln alltid syns
+        Child.SetActive(true);
     }
+
+
 }
