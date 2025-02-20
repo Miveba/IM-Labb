@@ -64,14 +64,14 @@ public class MonsterSpawner : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Update called.");
         var lockedPlane = DrivingSurfaceManager.LockedPlane;
        
-        if (lockedPlane != null)
+        if (lockedPlane )
         {
-            Debug.Log($"LockedPlane: {lockedPlane}");
+            Debug.Log("Locked plane found!");
             if (Package == null)
             {
+                 Debug.Log("Spawning package...");
                 SpawnPackage(lockedPlane);
             }
 
