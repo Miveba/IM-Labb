@@ -25,10 +25,12 @@ public class DrivingSurfaceManager : MonoBehaviour
     public ARRaycastManager RaycastManager;
     public ARPlane LockedPlane;
 
+    [System.Obsolete]
     public void LockPlane(ARPlane keepPlane)
     {
         // Disable all planes except the one we want to keep
         var arPlane = keepPlane.GetComponent<ARPlane>();
+        Debug.Log("Found");
         foreach (var plane in PlaneManager.trackables)
         {
             if (plane != arPlane)
@@ -54,6 +56,7 @@ public class DrivingSurfaceManager : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     private void DisableNewPlanes(ARPlanesChangedEventArgs args)
     {
         foreach (var plane in args.added)
