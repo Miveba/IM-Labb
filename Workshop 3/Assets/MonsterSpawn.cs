@@ -25,6 +25,8 @@ public class MonsterSpawner : MonoBehaviour
     public PackageBehaviour Package;
     public GameObject PackagePrefab;
 
+
+
     public static Vector3 RandomInTriangle(Vector3 v1, Vector3 v2)
     {
         float u = Random.Range(0.0f, 1.0f); 
@@ -57,13 +59,17 @@ public class MonsterSpawner : MonoBehaviour
         packageClone.transform.position = FindRandomLocation(plane);
 
         Package = packageClone.GetComponent<PackageBehaviour>();
+        Debug.Log($"Package: {Package}");
     }
 
     private void Update()
     {
+        Debug.Log("Update called.");
         var lockedPlane = DrivingSurfaceManager.LockedPlane;
+       
         if (lockedPlane != null)
         {
+            Debug.Log($"LockedPlane: {lockedPlane}");
             if (Package == null)
             {
                 SpawnPackage(lockedPlane);
@@ -73,5 +79,6 @@ public class MonsterSpawner : MonoBehaviour
             packagePosition.Set(packagePosition.x, lockedPlane.center.y, packagePosition.z);
         }
     }
+
 }
 
