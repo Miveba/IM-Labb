@@ -5,10 +5,12 @@ using UnityEngine.XR.ARSubsystems;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public GameObject monsterPrefab; // Monster-prefaben som ska spawna
+    public GameObject monsterPrefab1; // Monster-prefaben som ska spawna
+    public GameObject monsterPrefab2; // Monster-prefaben som ska spawna
     public ARPlaneManager planeManager; // Hanterar AR-plan
-
     private List<ARPlane> spawnedPlanes = new List<ARPlane>(); // Håller koll på plan som redan har monster
+    private bool monstersSpawned = false; // Håller koll på om monster redan spawnats
+
 
     private void OnEnable()
     {
@@ -37,20 +39,52 @@ public class MonsterSpawner : MonoBehaviour
             {
                 SpawnMonster(lockedPlane);
                 spawnedPlanes.Add(lockedPlane);
+                monstersSpawned = true; // Se till att vi bara spawnar monster en gång
+            }
+        }
+    }
+
+
+    private void SpawnMonster(ARPlane plane)
+    {
+        int monsterCount = 5; // Antal monster att spawna för varje prefab
+        if (monsterPrefab1 != null)
+        {
+
+            // Spawna monsterPrefab1
+            for (int i = 0; i < monsterCount; i++)
+            {
+                Vector3 randomOffset = new Vector3(
+                    Random.Range(-plane.size.x / 2, plane.size.x / 2),
+                    0,
+                    Random.Range(-plane.size.y / 2, plane.size.y / 2)
+                );
+
+                Vector3 spawnPosition = plane.transform.position + randomOffset;
+                GameObject monster = Instantiate(monsterPrefab1, spawnPosition, Quaternion.identity);
+                monster.transform.SetParent(plane.transform); // Sätt planet som förälder
+            }
+        }
+
+        if (monsterPrefab2 != null)
+        {
+            // Spawna monsterPrefab2
+            for (int i = 0; i < monsterCount; i++)
+            {
+                Vector3 randomOffset = new Vector3(
+                    Random.Range(-plane.size.x / 2, plane.size.x / 2),
+                    0,
+                    Random.Range(-plane.size.y / 2, plane.size.y / 2)
+                );
+
+                Vector3 spawnPosition = plane.transform.position + randomOffset;
+                GameObject monster = Instantiate(monsterPrefab2, spawnPosition, Quaternion.identity);
+                monster.transform.SetParent(plane.transform); // Sätt planet som förälder
             }
         }
     }
 
 
 
-    private void SpawnMonster(ARPlane plane)
-    {
-        if (monsterPrefab != null)
-        {
-            Vector3 spawnPosition = plane.transform.position; // Placera monstret på planet
-            GameObject monster = Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
-            monster.transform.SetParent(plane.transform); // Sätt planet som förälder så att det följer med
-        }
-    }
 }
 

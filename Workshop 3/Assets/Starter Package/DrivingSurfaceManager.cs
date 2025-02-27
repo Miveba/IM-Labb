@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.XR.ARFoundation;
 using UnityEngine;
-using UnityEngine.XR.ARFoundation;
 
 public class DrivingSurfaceManager : MonoBehaviour
 {
@@ -19,36 +17,82 @@ public class DrivingSurfaceManager : MonoBehaviour
 
     private void OnPlanesChanged(ARPlanesChangedEventArgs args)
     {
-        if (planeLocked) return; // 🛑 Stoppa om vi redan har låst ett plan
+        if (planeLocked || LockedPlane != null) return; // Om ett plan redan är låst, gör inget
 
+        // Vi letar efter det första planet som läggs till
         foreach (var plane in args.added)
         {
-            LockPlane(plane);
-            planeLocked = true; // 🔒 Markera att vi har låst ett plan
-            break; // 🚀 Avbryt loopen så att vi endast låser ett plan
+            LockPlane(plane); // Lås det första planet som upptäcks
+            planeLocked = true; // Markera att vi har låst ett plan
+            break; // Avbryt loopen för att låsa bara ett plan
         }
     }
 
     public void LockPlane(ARPlane keepPlane)
     {
+        if (LockedPlane != null) return; // Om det redan finns ett låst plan, gör inget
+
         LockedPlane = keepPlane;
 
+        // Hämta AR-kamerans position
+        Transform cameraTransform = Camera.main.transform;
+
+        // Flytta planet under kameran (ändra Y-värdet)
+        Vector3 newPosition = LockedPlane.transform.position;
+
+        // Sätt planet att vara en viss höjd under kameran (justera 10.0f för att få rätt avstånd)
+        newPosition.y = cameraTransform.position.y - 10.0f;
+
+        // Uppdatera planet till den nya positionen
+        LockedPlane.transform.position = newPosition;
+
+        // Inaktivera andra plan så att vi bara har ett aktivt plan
         foreach (var plane in PlaneManager.trackables)
         {
             if (plane != keepPlane)
             {
-                plane.gameObject.SetActive(false); // ❌ Inaktivera andra plan
+                plane.gameObject.SetActive(false);
             }
         }
 
-        PlaneManager.planesChanged -= OnPlanesChanged; // ⛔ Sluta lyssna på nya plan
+        // Sluta lyssna på nya planer efter att ha låst ett plan
+        PlaneManager.planesChanged -= OnPlanesChanged;
+
+        // Skala upp det låsta planet
+        ExpandLockedPlane(10f);
     }
 
     private void Update()
     {
+        // Om planet är subsumed by (om det förlorar sitt ursprungliga plan), uppdatera till det nya planet
         if (LockedPlane?.subsumedBy != null)
         {
             LockedPlane = LockedPlane.subsumedBy;
+        }
+
+        if (LockedPlane != null)
+        {
+            // Hämta AR-kamerans position
+            Transform cameraTransform = Camera.main.transform;
+
+            // Flytta planet under kameran (ändra Y-värdet)
+            Vector3 newPosition = LockedPlane.transform.position;
+            newPosition.y = cameraTransform.position.y - 10.0f; // Håll planet 10 meter under kameran
+
+            // Uppdatera planet till den nya positionen
+            LockedPlane.transform.position = newPosition;
+        }
+    }
+
+    public void ExpandLockedPlane(float newSize = 10f)
+    {
+        if (LockedPlane == null) return;
+
+        // Försök att ändra storleken på planet genom att justera dess MeshRenderer
+        var planeMesh = LockedPlane.GetComponent<MeshRenderer>();
+        if (planeMesh != null)
+        {
+            planeMesh.transform.localScale = new Vector3(newSize, 1, newSize); // Skala upp
         }
     }
 }
