@@ -45,6 +45,7 @@ public class DrivingSurfaceManager : MonoBehaviour
 
         // Sluta lyssna på nya planer efter att ha låst ett plan
         PlaneManager.planesChanged -= OnPlanesChanged;
+        PlaneManager.planesChanged += DisabledNewPlanes;
 
         // Skala upp det låsta planet
         ExpandLockedPlane(100f);
@@ -60,6 +61,15 @@ public class DrivingSurfaceManager : MonoBehaviour
         // Uppdatera planet till den nya positionen
         LockedPlane.transform.position = newPosition;
     }
+
+    private void DisabledNewPlanes(ARPlanesChangedEventArgs args)
+    {
+        foreach(var LockedPlane in args.added)
+        {
+            LockedPlane.gameObject.SetActive(false);
+        }
+    }
+
 
     private void Update()
     {
