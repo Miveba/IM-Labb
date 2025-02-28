@@ -30,6 +30,17 @@ public class ImageRecognitionBehaviour : MonoBehaviour
         {
             Debug.Log(trackedImage.name);
         }
+         // Uppdatera positionen för alla spårade bilder
+            foreach (var trackedImage in args.updated)
+            {
+                // Hämta det objekt som redan är spawnat i ARTrackedImageManager
+                GameObject trackedObject = trackedImage.gameObject;
+
+                // Uppdatera position och rotation
+                trackedObject.transform.position = trackedImage.transform.position;
+                trackedObject.transform.rotation = trackedImage.transform.rotation;
+            }
+        
     }
 
 }

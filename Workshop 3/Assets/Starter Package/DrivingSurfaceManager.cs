@@ -34,18 +34,6 @@ public class DrivingSurfaceManager : MonoBehaviour
 
         LockedPlane = keepPlane;
 
-        // Hämta AR-kamerans position
-        Transform cameraTransform = Camera.main.transform;
-
-        // Flytta planet under kameran (ändra Y-värdet)
-        Vector3 newPosition = LockedPlane.transform.position;
-
-        // Sätt planet att vara en viss höjd under kameran (justera 10.0f för att få rätt avstånd)
-        newPosition.y = cameraTransform.position.y - 10.0f;
-
-        // Uppdatera planet till den nya positionen
-        LockedPlane.transform.position = newPosition;
-
         // Inaktivera andra plan så att vi bara har ett aktivt plan
         foreach (var plane in PlaneManager.trackables)
         {
@@ -60,6 +48,17 @@ public class DrivingSurfaceManager : MonoBehaviour
 
         // Skala upp det låsta planet
         ExpandLockedPlane(10f);
+        // Hämta AR-kamerans position
+        Transform cameraTransform = Camera.main.transform;
+
+        // Flytta planet under kameran (ändra Y-värdet)
+        Vector3 newPosition = LockedPlane.transform.position;
+
+        // Sätt planet att vara en viss höjd under kameran (justera 10.0f för att få rätt avstånd)
+        newPosition.y = cameraTransform.position.y - 10.0f;
+
+        // Uppdatera planet till den nya positionen
+        LockedPlane.transform.position = newPosition;
     }
 
     private void Update()
