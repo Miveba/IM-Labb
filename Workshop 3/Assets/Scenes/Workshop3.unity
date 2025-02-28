@@ -329,8 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73756c9013e53084c9c4ffd19800c4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefab1: {fileID: 7734861169323980269, guid: 173685bc93484464b88d9f788d582359, type: 3}
-  monsterPrefab2: {fileID: 5278573886475851323, guid: c0ffd6e32415c45f59e277fe7314020d, type: 3}
+  monsterPrefab1: {fileID: 3293466191599242264, guid: 6f3c7a65834175a439ad1834963f653f, type: 3}
+  monsterPrefab2: {fileID: 8384424402953051621, guid: 95ec74cf99dfc7d4fa7604da0a419401, type: 3}
   planeManager: {fileID: 1120995892}
 --- !u!4 &590852286
 Transform:
