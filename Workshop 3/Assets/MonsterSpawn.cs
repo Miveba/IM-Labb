@@ -47,17 +47,17 @@ public class MonsterSpawner : MonoBehaviour
 
     private void SpawnMonster(ARPlane plane)
     {
-        int monsterCount = 5; // Antal monster att spawna för varje prefab
+        int monsterCount = 5; // Antal monster att spawna per prefab
+
         if (monsterPrefab1 != null)
         {
-
-            // Spawna monsterPrefab1
             for (int i = 0; i < monsterCount; i++)
             {
+                // Justera Random.Range så att det går utanför planetets storlek
                 Vector3 randomOffset = new Vector3(
-                    Random.Range(-plane.size.x / 2, plane.size.x / 2),
+                    Random.Range(-plane.size.x * 2f, plane.size.x * 2f),  // 50% större än planetets storlek
                     0,
-                    Random.Range(-plane.size.y / 2, plane.size.y / 2)
+                    Random.Range(-plane.size.y * 2f, plane.size.y * 2f)   // 50% större än planetets storlek
                 );
 
                 Vector3 spawnPosition = plane.transform.position + randomOffset;
@@ -68,13 +68,13 @@ public class MonsterSpawner : MonoBehaviour
 
         if (monsterPrefab2 != null)
         {
-            // Spawna monsterPrefab2
             for (int i = 0; i < monsterCount; i++)
             {
+                // Justera Random.Range så att det går utanför planetets storlek
                 Vector3 randomOffset = new Vector3(
-                    Random.Range(-plane.size.x / 2, plane.size.x / 2),
+                    Random.Range(-plane.size.x * 2f, plane.size.x * 2f),  // 50% större än planetets storlek
                     0,
-                    Random.Range(-plane.size.y / 2, plane.size.y / 2)
+                    Random.Range(-plane.size.y * 2f, plane.size.y * 2f)   // 50% större än planetets storlek
                 );
 
                 Vector3 spawnPosition = plane.transform.position + randomOffset;
@@ -83,8 +83,6 @@ public class MonsterSpawner : MonoBehaviour
             }
         }
     }
-
-
 
 }
 
