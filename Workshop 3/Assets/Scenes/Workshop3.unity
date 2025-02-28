@@ -663,6 +663,8 @@ GameObject:
   m_Component:
   - component: {fileID: 943295213}
   - component: {fileID: 943295212}
+  - component: {fileID: 943295215}
+  - component: {fileID: 943295214}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -703,6 +705,36 @@ Transform:
   - {fileID: 624287997}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &943295214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943295211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 074e689cea4a2d9439552da37e22fd59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &943295215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943295211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <trackablesChanged>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SerializedLibrary: {fileID: 11400000, guid: 03479dfc4b732df4ab13c18f7762b0ee, type: 2}
+  m_MaxNumberOfMovingImages: 2
+  m_TrackedImagePrefab: {fileID: 2218393541246526614, guid: 0b5ebc0f273ab0446993bf9aa0f34ee8, type: 3}
 --- !u!1001 &1062204883
 PrefabInstance:
   m_ObjectHideFlags: 0
