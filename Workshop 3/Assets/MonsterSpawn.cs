@@ -47,44 +47,64 @@ public class MonsterSpawner : MonoBehaviour
 
     private void SpawnMonster(ARPlane plane)
     {
-        int monsterCount = 5; // Antal monster att spawna för varje prefab
+        int monsterCount = 5; // Antal monster att spawna per prefab
+
+        // Hämta den nya storleken på planet från dess transform (eftersom vi skalat upp det)
+        float planeSizeX = plane.transform.localScale.x * 10; // Multiplicera med 10 för att få rätt skala
+        float planeSizeZ = plane.transform.localScale.z * 10;
+
         if (monsterPrefab1 != null)
         {
-
-            // Spawna monsterPrefab1
             for (int i = 0; i < monsterCount; i++)
             {
-                Vector3 randomOffset = new Vector3(
-                    Random.Range(-plane.size.x / 2, plane.size.x / 2),
-                    0,
-                    Random.Range(-plane.size.y / 2, plane.size.y / 2)
-                );
-
-                Vector3 spawnPosition = plane.transform.position + randomOffset;
+                Vector3 spawnPosition = GetRandomSpawnPosition(plane, planeSizeX, planeSizeZ);
                 GameObject monster = Instantiate(monsterPrefab1, spawnPosition, Quaternion.identity);
-                monster.transform.SetParent(plane.transform); // Sätt planet som förälder
+                monster.transform.SetParent(plane.transform);
             }
         }
 
         if (monsterPrefab2 != null)
         {
-            // Spawna monsterPrefab2
             for (int i = 0; i < monsterCount; i++)
             {
-                Vector3 randomOffset = new Vector3(
-                    Random.Range(-plane.size.x / 2, plane.size.x / 2),
-                    0,
-                    Random.Range(-plane.size.y / 2, plane.size.y / 2)
-                );
-
-                Vector3 spawnPosition = plane.transform.position + randomOffset;
+                Vector3 spawnPosition = GetRandomSpawnPosition(plane, planeSizeX, planeSizeZ);
                 GameObject monster = Instantiate(monsterPrefab2, spawnPosition, Quaternion.identity);
-                monster.transform.SetParent(plane.transform); // Sätt planet som förälder
+                monster.transform.SetParent(plane.transform);
             }
         }
     }
 
+    // Ny metod för att få en slumpmässig position över hela det expanderade planet
+    private Vector3 GetRandomSpawnPosition(ARPlane plane, float width, float height)
+    {
+        bool spawnAtEdge = Random.value > 0.7f; // 30% chans att spawna vid kanterna
 
+        float xOffset, zOffset;
+
+        if (spawnAtEdge)
+        {
+            // Välj antingen en position nära kanterna
+            if (Random.value > 0.5f)
+            {
+                xOffset = (Random.value > 0.5f ? 1 : -1) * (width / 2 * 0.9f); // 90% av maxbredden
+                zOffset = Random.Range(-height / 2, height / 2);
+            }
+            else
+            {
+                xOffset = Random.Range(-width / 2, width / 2);
+                zOffset = (Random.value > 0.5f ? 1 : -1) * (height / 2 * 0.9f);
+            }
+        }
+        else
+        {
+            // Slumpa en position över hela planet
+            xOffset = Random.Range(-width / 2, width / 2);
+            zOffset = Random.Range(-height / 2, height / 2);
+        }
+
+        Vector3 randomOffset = new Vector3(xOffset, 0, zOffset);
+        return plane.transform.position + randomOffset;
+    }
 
 }
 
