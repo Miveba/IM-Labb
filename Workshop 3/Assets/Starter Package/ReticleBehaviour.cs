@@ -64,7 +64,7 @@ public class ReticleBehaviour : MonoBehaviour
         //}
 
         // 🟢 Håll Child-objektet alltid framför kameran i rätt riktning
-        float distance = 0.5f; // Justera om nödvändigt
+        float distance = 0.2f; // Justera om nödvändigt
         Child.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
 
         // 🟢 Se till att retikeln alltid är vänd framåt
