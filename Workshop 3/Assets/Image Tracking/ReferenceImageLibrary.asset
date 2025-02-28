@@ -28,4 +28,4 @@ MonoBehaviour:
     m_Size: {x: 0.3, y: 0.16877638}
     m_SpecifySize: 0
     m_Name: TRACKING-MARKER
-    m_Texture: {fileID: 2800000, guid: c66f81e5eb966fc49a415fda35a666a2, type: 3}
+    m_Texture: {fileID: 0}
