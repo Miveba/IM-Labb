@@ -8,13 +8,13 @@ public class MonsterSpawner : MonoBehaviour
     public GameObject monsterPrefab1; // Monster-prefaben som ska spawna
     public GameObject monsterPrefab2; // Monster-prefaben som ska spawna
     public ARPlaneManager planeManager; // Hanterar AR-plan
-    private List<ARPlane> spawnedPlanes = new List<ARPlane>(); // Håller koll på plan som redan har monster
-    private bool monstersSpawned = false; // Håller koll på om monster redan spawnats
+    private List<ARPlane> spawnedPlanes = new List<ARPlane>(); // Håller koll pEplan som redan har monster
+    private bool monstersSpawned = false; // Håller koll pEom monster redan spawnats
 
 
     private void OnEnable()
     {
-        // Lyssna på eventet när nya plan upptäcks
+        // Lyssna pEeventet när nya plan upptäcks
         planeManager.planesChanged += OnPlanesChanged;
     }
 
@@ -53,7 +53,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             for (int i = 0; i < monsterCount; i++)
             {
-                // Justera Random.Range så att det går utanför planetets storlek
+                // Justera Random.Range sEatt det går utanför planetets storlek
                 Vector3 randomOffset = new Vector3(
                     Random.Range(-plane.size.x * 2f, plane.size.x * 2f),  // 50% större än planetets storlek
                     0,
@@ -70,7 +70,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             for (int i = 0; i < monsterCount; i++)
             {
-                // Justera Random.Range så att det går utanför planetets storlek
+                // Justera Random.Range sEatt det går utanför planetets storlek
                 Vector3 randomOffset = new Vector3(
                     Random.Range(-plane.size.x * 2f, plane.size.x * 2f),  // 50% större än planetets storlek
                     0,
