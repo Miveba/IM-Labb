@@ -41,21 +41,20 @@ public class Player : MonoBehaviour
     private void RaycastCheck()
     {
         RaycastHit hit;
-        // Kontrollera om raycasten träffar något framför spelaren
+        // Draw the ray for debugging
+        Debug.DrawRay(transform.position, transform.forward * raycastDistance, Color.red);
+
         if (Physics.Raycast(transform.position, transform.forward, out hit, raycastDistance))
         {
-            // Om vi träffar något, visa vad vi träffade i debug-loggen
             Debug.Log("Hit something: " + hit.collider.gameObject.name);
 
-            // Om objektet som träffades är ett monster, ge skada
-            if (hit.collider.CompareTag("Enemy")) // Se till att ditt monster har taggen "Monster"
+            if (hit.collider.CompareTag("Enemy"))
             {
-                TakeDamage(10); // Ta skada
-                Vibrate(); // Vibrera enheten
+                TakeDamage(10);
+                Vibrate();
             }
         }
     }
-
 
     private void Vibrate()
     {
