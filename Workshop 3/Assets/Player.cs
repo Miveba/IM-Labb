@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem; // Krävs för vibrationer på mobil
+using UnityEngine.UI; // För att hantera UI-element
 
 public class Player : MonoBehaviour
 {
     public int maxHP = 100;
     public int currentHP;
     public float raycastDistance = 50f;
+    public Slider healthBar; // UI Slider för HP
 
     private void Start()
     {
         currentHP = maxHP;
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHP;
+            healthBar.value = currentHP;
+        }
     }
 
     public void TakeDamage(int damage)
@@ -21,6 +28,7 @@ public class Player : MonoBehaviour
             Debug.Log("Player is dead!");
             // Lägg till dödslogik här
         }
+        UpdateHealthBar();
         Debug.Log("Player HP: " + currentHP);
     }
 
@@ -30,7 +38,16 @@ public class Player : MonoBehaviour
         if (currentHP > maxHP)
             currentHP = maxHP;
 
+        UpdateHealthBar();
         Debug.Log("Player healed! Current HP: " + currentHP);
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar != null)
+        {
+            healthBar.value = currentHP;
+        }
     }
 
     private void Update()
