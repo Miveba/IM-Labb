@@ -1266,7 +1266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpPickup: {fileID: 3374098437583232763, guid: 23db1e5a5b02fd74fb34f70ad72347c2, type: 3}
   planeManager: {fileID: 1120995892}
-  minSpawnDistance: 0.5
 --- !u!4 &1608821249
 Transform:
   m_ObjectHideFlags: 0
