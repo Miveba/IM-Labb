@@ -23,8 +23,8 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy")) // Om vi träffar ett fiendeobjekt
-        {
+        if(other.CompareTag("Enemy1") || other.CompareTag("Enemy2")) // Om vi träffar ett fiendeobjekt
+        {    
             Destroy(other.gameObject); // Förstör fienden
             Destroy(gameObject);       // Förstör kulan
         }

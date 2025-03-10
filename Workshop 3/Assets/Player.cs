@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Hit something: " + hit.collider.gameObject.name);
 
-            if (hit.collider.CompareTag("Enemy"))
+            if (hit.collider.CompareTag("Enemy1") || hit.collider.CompareTag("Enemy2"))
             {
                 TakeDamage(10);
                 Vibrate();

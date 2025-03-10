@@ -8,22 +8,21 @@ public class MonsterSpawner : MonoBehaviour
     public GameObject monsterPrefab1; // Monster-prefaben som ska spawna
     public GameObject monsterPrefab2; // Monster-prefaben som ska spawna
     public ARPlaneManager planeManager; // Hanterar AR-plan
-    private List<ARPlane> spawnedPlanes = new List<ARPlane>(); // HÂller koll pÅEplan som redan har monster
-    private bool monstersSpawned = false; // HÂller koll pÅEom monster redan spawnats
+    private List<ARPlane> spawnedPlanes = new List<ARPlane>(); // HÂller koll pÂ plan som redan har monster
+
+    public int desiredMonsterCount1 = 3; // Antal monsterPrefab1 som alltid ska finnas
+    public int desiredMonsterCount2 = 3; // Antal monsterPrefab2 som alltid ska finnas
 
     private float minSpawnDistance = 0.5f; // Minsta avstÂnd mellan monster vid spawn
-
-    private List<Vector3> spawnedMonsterPositions = new List<Vector3>(); // HÂller koll pÅEspawnade monsterpositioner
+    private List<Vector3> spawnedMonsterPositions = new List<Vector3>(); // HÂller koll pÂ spawnade monsterpositioner
 
     private void OnEnable()
     {
-        // Lyssna pÅEeventet n‰r nya plan uppt‰cks
         planeManager.planesChanged += OnPlanesChanged;
     }
 
     private void OnDisable()
     {
-        // Sluta lyssna n‰r scriptet inaktiveras
         planeManager.planesChanged -= OnPlanesChanged;
     }
 
@@ -32,54 +31,44 @@ public class MonsterSpawner : MonoBehaviour
         if (planeManager == null || planeManager.trackables.count == 0)
             return;
 
-        // H‰mta LockedPlane frÂn DrivingSurfaceManager
         DrivingSurfaceManager drivingSurfaceManager = FindObjectOfType<DrivingSurfaceManager>();
         if (drivingSurfaceManager != null && drivingSurfaceManager.LockedPlane != null)
         {
             ARPlane lockedPlane = drivingSurfaceManager.LockedPlane;
-
             if (!spawnedPlanes.Contains(lockedPlane))
             {
                 SpawnMonsters(lockedPlane);
                 spawnedPlanes.Add(lockedPlane);
-                monstersSpawned = true; // Se till att vi bara spawnar monster en gÂng
             }
         }
     }
 
     private void SpawnMonsters(ARPlane plane)
     {
-        int monsterCount1 = 2; // Antal monster att spawna fˆr monsterPrefab1
-        int monsterCount2 = 2; // Antal monster att spawna fˆr monsterPrefab2
+        EnsureMonsterCount(plane);
+    }
 
-        // Spawna monsterPrefab1
-        if (monsterPrefab1 != null)
+    private void EnsureMonsterCount(ARPlane plane)
+    {
+        int currentMonsterCount1 = GameObject.FindGameObjectsWithTag("Enemy1").Length;
+        int currentMonsterCount2 = GameObject.FindGameObjectsWithTag("Enemy2").Length;
+
+        while (currentMonsterCount1 < desiredMonsterCount1)
         {
-            for (int i = 0; i < monsterCount1; i++)
-            {
-                Vector3 spawnPosition = GetValidSpawnPosition(plane);
-                if (spawnPosition != Vector3.zero) // Om en giltig spawnposition hittas
-                {
-                    GameObject monster = Instantiate(monsterPrefab1, spawnPosition, Quaternion.identity);
-                    monster.transform.SetParent(plane.transform); // S‰tt planet som fˆr‰lder
-                    spawnedMonsterPositions.Add(spawnPosition); // L‰gg till positionen i listan
-                }
-            }
+            Vector3 spawnPosition = GetValidSpawnPosition(plane);
+            GameObject monster = Instantiate(monsterPrefab1, spawnPosition, Quaternion.identity);
+            monster.tag = "Enemy1";
+            spawnedMonsterPositions.Add(spawnPosition);
+            currentMonsterCount1++;
         }
 
-        // Spawna monsterPrefab2
-        if (monsterPrefab2 != null)
+        while (currentMonsterCount2 < desiredMonsterCount2)
         {
-            for (int i = 0; i < monsterCount2; i++)
-            {
-                Vector3 spawnPosition = GetValidSpawnPosition(plane);
-                if (spawnPosition != Vector3.zero) // Om en giltig spawnposition hittas
-                {
-                    GameObject monster = Instantiate(monsterPrefab2, spawnPosition, Quaternion.identity);
-                    monster.transform.SetParent(plane.transform); // S‰tt planet som fˆr‰lder
-                    spawnedMonsterPositions.Add(spawnPosition); // L‰gg till positionen i listan
-                }
-            }
+            Vector3 spawnPosition = GetValidSpawnPosition(plane);
+            GameObject monster = Instantiate(monsterPrefab2, spawnPosition, Quaternion.identity);
+            monster.tag = "Enemy2";
+            spawnedMonsterPositions.Add(spawnPosition);
+            currentMonsterCount2++;
         }
     }
 
@@ -88,18 +77,16 @@ public class MonsterSpawner : MonoBehaviour
         Vector3 spawnPosition = Vector3.zero;
         bool validPositionFound = false;
 
-        for (int attempts = 0; attempts < 100; attempts++) // Begr‰nsa antal fˆrsˆk
+        for (int attempts = 0; attempts < 100; attempts++)
         {
-            // Justera Random.Range sÅEatt det gÂr utanfˆr planetets storlek
             Vector3 randomOffset = new Vector3(
-                Random.Range(-plane.size.x * 2f, plane.size.x * 2f),  // 50% stˆrre ‰n planetets storlek
+                Random.Range(-plane.size.x * 2f, plane.size.x * 2f),
                 0,
-                Random.Range(-plane.size.y * 2f, plane.size.y * 2f)   // 50% stˆrre ‰n planetets storlek
+                Random.Range(-plane.size.y * 2f, plane.size.y * 2f)
             );
 
             spawnPosition = plane.transform.position + randomOffset;
 
-            // Kontrollera om positionen ‰r giltig
             if (IsPositionValid(spawnPosition))
             {
                 validPositionFound = true;
@@ -107,30 +94,40 @@ public class MonsterSpawner : MonoBehaviour
             }
         }
 
-        return validPositionFound ? spawnPosition : Vector3.zero; // Retur om giltig position hittas, annars Vector3.zero
+        return validPositionFound ? spawnPosition : Vector3.zero;
     }
 
     private bool IsPositionValid(Vector3 position)
     {
-        // Kontrollera om positionen ‰r tillr‰ckligt lÂngt frÂn andra spawnade monster
         foreach (Vector3 otherPosition in spawnedMonsterPositions)
         {
             if (Vector3.Distance(position, otherPosition) < minSpawnDistance)
             {
-                return false; // Positionen ‰r fˆr n‰ra ett annat monster
+                return false;
             }
         }
 
-        // Kontrollera om positionen krockar med andra objekt i v‰rlden (som monster)
-        Collider[] colliders = Physics.OverlapSphere(position, 0.5f); // Justera radien beroende pÅEmonsterstorlek
+        Collider[] colliders = Physics.OverlapSphere(position, 0.5f);
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Enemy")) // Om en annan monster finns h‰r
+            if (collider.CompareTag("Enemy1") || collider.CompareTag("Enemy2"))
             {
-                return false; // Positionen ‰r upptagen
+                return false;
             }
         }
 
-        return true; // Positionen ‰r giltig 
+        return true;
+    }
+
+    private void Update()
+    {
+        if (planeManager != null && planeManager.trackables.count > 0)
+        {
+            DrivingSurfaceManager drivingSurfaceManager = FindObjectOfType<DrivingSurfaceManager>();
+            if (drivingSurfaceManager != null && drivingSurfaceManager.LockedPlane != null)
+            {
+                EnsureMonsterCount(drivingSurfaceManager.LockedPlane);
+            }
+        }
     }
 }
