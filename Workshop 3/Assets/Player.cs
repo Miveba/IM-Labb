@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem; // Krävs för vibrationer på mobil
 using UnityEngine.UI; // För att hantera UI-element
+using UnityEngine.SceneManagement; // För att byta scen
 
 public class Player : MonoBehaviour
 {
     public int maxHP = 100;
     private int currentHP;
-    private float raycastDistance = 50f;
+    public float raycastDistance = 50f;
     public Slider healthBar; // UI Slider för HP
+
+    public int score = 0; // Håller koll på poängen
+    public Text scoreText; // UI-text för att visa poäng
 
     private void Start()
     {
@@ -17,6 +21,8 @@ public class Player : MonoBehaviour
             healthBar.maxValue = maxHP;
             healthBar.value = currentHP;
         }
+
+        UpdateScoreText(); // Uppdatera poängvisningen vid start
     }
 
     public void TakeDamage(int damage)
@@ -58,7 +64,6 @@ public class Player : MonoBehaviour
     private void RaycastCheck()
     {
         RaycastHit hit;
-        // Draw the ray for debugging
         Debug.DrawRay(transform.position, transform.forward * raycastDistance, Color.red);
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, raycastDistance))
@@ -69,7 +74,28 @@ public class Player : MonoBehaviour
             {
                 TakeDamage(10);
                 Vibrate();
+                IncreaseScore(10); // Ökar poängen när en fiende träffas
             }
+        }
+    }
+
+    private void IncreaseScore(int amount)
+    {
+        score += amount;
+        UpdateScoreText();
+
+        if (score >= 30)
+        {
+            Debug.Log("Level avklarad!");
+            SceneManager.LoadScene("LevelCompleteScene"); // Byt ut med namnet på din scen
+        }
+    }
+
+    private void UpdateScoreText()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Poäng: " + score;
         }
     }
 
@@ -79,7 +105,7 @@ public class Player : MonoBehaviour
         Debug.Log("Attempting to vibrate");
         Handheld.Vibrate();
 #else
-    Debug.Log("Vibration not supported on this platform");
+        Debug.Log("Vibration not supported on this platform");
 #endif
         Debug.Log("Vibrating on impact!");
     }
