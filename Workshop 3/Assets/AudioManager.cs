@@ -4,6 +4,7 @@ public class AudioManager : MonoBehaviour
 {
     // Referens till AudioSource
     private AudioSource audioSource;
+    private AudioSource bg;
 
     // De tre ljudklippen
     public AudioClip soundClip1;
@@ -17,9 +18,10 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = backgroundMusic;
-        audioSource.loop = true;  // Sätt musikens loop till true
-        audioSource.Play();  // Börja spela musiken
+        bg = GetComponent<AudioSource>();
+        bg.clip = backgroundMusic;
+        bg.loop = true;  // Sätt musikens loop till true
+        bg.Play();  // Börja spela musiken
     }
 
     // Metod för att spela upp ljud 1
