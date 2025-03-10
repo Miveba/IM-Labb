@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 
-public class Tutorial: MonoBehaviour
+public class Tutorial : MonoBehaviour
 {
     public TMP_Text instructionText;  // Referens till textkomponenten
     private int currentStep = 0;  // Håller reda på vilket steg vi är på
@@ -14,7 +13,6 @@ public class Tutorial: MonoBehaviour
         "Steg 2: Rikta kameran mot en bild på ett jordklot för att få ditt vapen",
         "Steg 3: Sikta och skjut på monstrerna.",
         "Lycka till!!"
-
     };
 
     void Start()
@@ -39,8 +37,8 @@ public class Tutorial: MonoBehaviour
             }
             else
             {
-                // Om alla steg är slutförda, gå vidare till nästa scen
-                LoadNewScene("Game");
+                // Om alla steg är slutförda, ta bort texten
+                HideInstruction();
             }
         }
     }
@@ -51,18 +49,9 @@ public class Tutorial: MonoBehaviour
         instructionText.text = instructions[step];
     }
 
-    public void LoadNewScene(string sceneName)
+    void HideInstruction()
     {
-        // Hämta den aktuella scenen
-        Scene currentScene = SceneManager.GetActiveScene();
-
-        // Hämta alla objekt i den aktuella scenen och ta bort dem
-        foreach (GameObject obj in currentScene.GetRootGameObjects())
-        {
-            Destroy(obj);
-        }
-
-        // Ladda den nya scenen
-        SceneManager.LoadScene(sceneName);
+        // Ta bort texten när alla instruktioner är klara
+        instructionText.text = "";
     }
 }
