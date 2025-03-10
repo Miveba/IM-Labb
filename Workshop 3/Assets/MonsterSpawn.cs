@@ -11,7 +11,7 @@ public class MonsterSpawner : MonoBehaviour
     private List<ARPlane> spawnedPlanes = new List<ARPlane>(); // Håller koll pEplan som redan har monster
     private bool monstersSpawned = false; // Håller koll pEom monster redan spawnats
 
-    public float minSpawnDistance = 1.0f; // Minsta avstånd mellan monster vid spawn
+    private float minSpawnDistance = 0.5f; // Minsta avstånd mellan monster vid spawn
 
     private List<Vector3> spawnedMonsterPositions = new List<Vector3>(); // Håller koll pEspawnade monsterpositioner
 
@@ -49,7 +49,7 @@ public class MonsterSpawner : MonoBehaviour
 
     private void SpawnMonsters(ARPlane plane)
     {
-        int monsterCount1 = 1; // Antal monster att spawna för monsterPrefab1
+        int monsterCount1 = 2; // Antal monster att spawna för monsterPrefab1
         int monsterCount2 = 2; // Antal monster att spawna för monsterPrefab2
 
         // Spawna monsterPrefab1

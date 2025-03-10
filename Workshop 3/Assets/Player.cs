@@ -5,7 +5,7 @@ using UnityEngine.UI; // För att hantera UI-element
 public class Player : MonoBehaviour
 {
     public int maxHP = 100;
-    public int currentHP;
+    private int currentHP;
     public float raycastDistance = 50f;
     public Slider healthBar; // UI Slider för HP
 
