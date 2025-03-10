@@ -27,6 +27,6 @@ public class TimerMeny : MonoBehaviour
 
     void LoadNextRoom()
     {
-        SceneManager.LoadScene("Game"); // Byt ut "NextScene" mot namnet på din scen
+        SceneManager.LoadScene("Onboarding"); // Byt ut "NextScene" mot namnet på din scen
     }
 }
