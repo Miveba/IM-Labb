@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem; // Krävs för vibrationer på mobil
 using UnityEngine.UI; // För att hantera UI-element
-using UnityEngine.SceneManagement; // För att byta scen
+using UnityEngine.SceneManagement;
+using TMPro; // För att byta scen
 
 public class Player : MonoBehaviour
 {
     public int maxHP = 100;
     private int currentHP;
-    public float raycastDistance = 50f;
+    private float raycastDistance = 2f;
     public Slider healthBar; // UI Slider för HP
 
     public int score = 0; // Håller koll på poängen
-    public Text scoreText; // UI-text för att visa poäng
+    public TMP_Text scoreText; // UI-text för att visa poäng
 
     private void Start()
     {
@@ -74,20 +75,19 @@ public class Player : MonoBehaviour
             {
                 TakeDamage(10);
                 Vibrate();
-                IncreaseScore(10); // Ökar poängen när en fiende träffas
             }
         }
     }
 
-    private void IncreaseScore(int amount)
+    public void IncreaseScore(int amount)
     {
         score += amount;
         UpdateScoreText();
 
-        if (score >= 30)
+        if (score >= 60)
         {
             Debug.Log("Level avklarad!");
-            SceneManager.LoadScene("LevelCompleteScene"); // Byt ut med namnet på din scen
+            SceneManager.LoadScene("Meny"); // Byt ut med namnet på din scen
         }
     }
 
@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Poäng: " + score;
+            scoreText.text = "Poäng: " + score + "/ 60";
         }
     }
 

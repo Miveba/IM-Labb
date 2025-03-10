@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
         {    
             Destroy(other.gameObject); // Förstör fienden
             Destroy(gameObject);       // Förstör kulan
+            player.IncreaseScore(5);
         }
         else if (other.CompareTag("HP")) // Om vi träffar ett HP-objekt
         {
