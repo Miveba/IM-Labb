@@ -6,7 +6,7 @@ public class MonsterAI : MonoBehaviour
 
     protected Transform player; // Spelaren (AR-kameran)
 
-
+    private AudioManager manager;
     protected virtual void Start()
     {
         // Hämta kamerans transform (spelaren)
@@ -28,5 +28,6 @@ public class MonsterAI : MonoBehaviour
     {
         transform.position += direction * speed * Time.deltaTime;
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+        manager.Monster(0.5f, 0.5f);
     }
 }

@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
     private float speed = 10f;    // Hastigheten som kulan ska röra sig med
     private float lifeTime = 5f;  // Hur länge kulan ska existera innan den förstörs
     private Player player;       // Player-referens
+    private AudioManager audioManager;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class Bullet : MonoBehaviour
         {
             // Applicera en kraft framåt i den riktning objektet är roterat (transform.forward)
             rb.linearVelocity = transform.forward * speed;
+            audioManager.BulletSound(1,1);
         }
 
         Destroy(gameObject, lifeTime); // Förstör kulan efter en viss tid
@@ -32,7 +34,8 @@ public class Bullet : MonoBehaviour
         else if (other.CompareTag("HP")) // Om vi träffar ett HP-objekt
         {
             Destroy(other.gameObject);  // Förstör HP-objektet
-            Destroy(gameObject);        // Förstör kulan
+            Destroy(gameObject);
+            audioManager.HealthSound(1, 1);
             if (player != null)
             {
                 player.GainHP(40); // Ge spelaren 40 HP om referensen är korrekt

@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     public int score = 0; // Håller koll på poängen
     public TMP_Text scoreText; // UI-text för att visa poäng
+    private AudioManager audioManager;
 
     private void Start()
     {
@@ -75,6 +76,8 @@ public class Player : MonoBehaviour
             {
                 TakeDamage(10);
                 Vibrate();
+                audioManager.DamageSound(1, 1);
+
             }
         }
     }

@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip soundClip1;
     public AudioClip soundClip2;
     public AudioClip soundClip3;
+    public AudioClip soundClip4;
+    public AudioClip soundClip5;
 
     // Startmetod där vi hämtar AudioSource komponenten
     void Start()
@@ -17,7 +19,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // Metod för att spela upp ljud 1
-    public void PlaySound1(float pitch = 1.0f, float volume = 1.0f)
+    public void BulletSound(float pitch = 1.0f, float volume = 1.0f)
     {
         // Sätt pitch och volume innan vi spelar upp ljudet
         audioSource.pitch = pitch;
@@ -26,7 +28,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // Metod för att spela upp ljud 2
-    public void PlaySound2(float pitch = 1.0f, float volume = 1.0f)
+    public void DamageSound(float pitch = 1.0f, float volume = 1.0f)
     {
         // Sätt pitch och volume innan vi spelar upp ljudet
         audioSource.pitch = pitch;
@@ -35,11 +37,27 @@ public class AudioManager : MonoBehaviour
     }
 
     // Metod för att spela upp ljud 3
-    public void PlaySound3(float pitch = 1.0f, float volume = 1.0f)
+    public void MonsterMove(float pitch = 1.0f, float volume = 1.0f)
+    {
+        audioSource.pitch = pitch;
+        audioSource.volume = volume;
+        audioSource.loop = true;  // Gör att ljudklippet loopar
+        audioSource.PlayOneShot(soundClip3); // Spela upp ljudklippet
+    }
+
+    public void Monster(float pitch = 1.0f, float volume = 1.0f)
     {
         // Sätt pitch och volume innan vi spelar upp ljudet
         audioSource.pitch = pitch;
         audioSource.volume = volume;
-        audioSource.PlayOneShot(soundClip3); // Spela upp ljudklippet
+        audioSource.PlayOneShot(soundClip4); // Spela upp ljudklippet
+    }
+
+    public void HealthSound(float pitch = 1.0f, float volume = 1.0f)
+    {
+        // Sätt pitch och volume innan vi spelar upp ljudet
+        audioSource.pitch = pitch;
+        audioSource.volume = volume;
+        audioSource.PlayOneShot(soundClip4); // Spela upp ljudklippet
     }
 }
