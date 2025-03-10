@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public int maxHP = 100;
     private int currentHP;
-    public float raycastDistance = 50f;
+    private float raycastDistance = 50f;
     public Slider healthBar; // UI Slider för HP
 
     private void Start()

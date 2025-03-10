@@ -46,7 +46,7 @@ public class Health : MonoBehaviour
 
     private void SpawnHP(ARPlane plane)
     {
-        int hpSpawn = 1;
+        int hpSpawn = 2;
 
         if (hpPickup != null)
         {
