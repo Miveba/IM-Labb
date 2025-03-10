@@ -4,7 +4,7 @@ public class Gun : MonoBehaviour
 {
     public GameObject bulletPrefab;   // Kulans prefab
     public Transform firePoint;       // Var kulorna skjuts ifrån
-    public float fireRate = 3f;     // Hur snabbt vi skjuter
+    private float fireRate = 0.5f;     // Hur snabbt vi skjuter
 
     void Start()
     {
