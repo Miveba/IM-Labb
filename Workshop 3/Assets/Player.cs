@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Hit something: " + hit.collider.gameObject.name);
 
-            if (hit.collider.CompareTag("Enemy1") || hit.collider.CompareTag("Enemy2"))
+            if (hit.collider.CompareTag("Enemy"))
             {
                 TakeDamage(10);
                 Vibrate();
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         score += amount;
         UpdateScoreText();
 
-        if (score >= 60)
+        if (score >= 6)
         {
             Debug.Log("Level avklarad!");
             SceneManager.LoadScene("Victory"); // Byt ut med namnet på din scen
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Poäng: " + score + "/ 60";
+            scoreText.text = "Antal dödade monster: " + score + "/ 6";
         }
     }
 
