@@ -57,7 +57,7 @@ public class DrivingSurfaceManager : MonoBehaviour
 
         // Sätt planet att vara en viss höjd under kameran (justera 10.0f för att få rätt avstånd)
         newPosition.y = cameraTransform.position.y - 10.0f;
-        newPosition.z = cameraTransform.position.z + 20.0f; // Håll planet 10 meter under kameran
+        newPosition.z = cameraTransform.position.z + 15.0f; // Håll planet 10 meter under kameran
 
         // Uppdatera planet till den nya positionen
         LockedPlane.transform.position = newPosition;
@@ -88,7 +88,7 @@ public class DrivingSurfaceManager : MonoBehaviour
             // Flytta planet under kameran (ändra Y-värdet)
             Vector3 newPosition = LockedPlane.transform.position;
             newPosition.y = cameraTransform.position.y - 10.0f; // Håll planet 10 meter under kameran
-            newPosition.z = cameraTransform.position.z + 20.0f; // Håll planet 10 meter under kameran
+            newPosition.z = cameraTransform.position.z + 15.0f; // Håll planet 10 meter under kameran
 
             // Uppdatera planet till den nya positionen
             LockedPlane.transform.position = newPosition;
