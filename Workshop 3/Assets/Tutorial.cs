@@ -40,7 +40,7 @@ public class Tutorial: MonoBehaviour
             else
             {
                 // Om alla steg är slutförda, gå vidare till nästa scen
-                NextScene();
+                LoadNewScene("Game");
             }
         }
     }
@@ -51,13 +51,18 @@ public class Tutorial: MonoBehaviour
         instructionText.text = instructions[step];
     }
 
-    void NextScene()
+    public void LoadNewScene(string sceneName)
     {
-        // Här byts scen, och vi ser till att resetta allting i spelet.
-        // För att återställa spelet innan scenbytet
-        PlayerPrefs.DeleteAll();  // Rensa sparade data om det finns
+        // Hämta den aktuella scenen
+        Scene currentScene = SceneManager.GetActiveScene();
 
-        // Ladda nästa scen
-        SceneManager.LoadScene("Game");  // Byt ut "NextSceneName" mot din scen.
+        // Hämta alla objekt i den aktuella scenen och ta bort dem
+        foreach (GameObject obj in currentScene.GetRootGameObjects())
+        {
+            Destroy(obj);
+        }
+
+        // Ladda den nya scenen
+        SceneManager.LoadScene(sceneName);
     }
 }
