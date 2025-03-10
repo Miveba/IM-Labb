@@ -11,11 +11,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip soundClip3;
     public AudioClip soundClip4;
     public AudioClip soundClip5;
+    public AudioClip backgroundMusic;
 
     // Startmetod där vi hämtar AudioSource komponenten
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = backgroundMusic;
+        audioSource.loop = true;  // Sätt musikens loop till true
+        audioSource.Play();  // Börja spela musiken
     }
 
     // Metod för att spela upp ljud 1
