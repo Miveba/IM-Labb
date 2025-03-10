@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Game Over.unity
+    guid: 4a0ccc9f153274c4091d98276cdfd12d
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 0050d5b15b8cf8e4591c9635a58008ce
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 0e03cdf7b11163d4189085aad1029171, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: a0f777336de611649bb5b60b9b5fa3bc, type: 2}

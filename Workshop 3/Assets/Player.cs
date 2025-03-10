@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     public int maxHP = 100;
     private int currentHP;
-    private float raycastDistance = 2f;
+    private float raycastDistance = 5f;
     public Slider healthBar; // UI Slider för HP
 
     public int score = 0; // Håller koll på poängen
@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
             currentHP = 0;
             Debug.Log("Player is dead!");
             // Lägg till dödslogik här
+            SceneManager.LoadScene("Game Over");
         }
         UpdateHealthBar();
         Debug.Log("Player HP: " + currentHP);
@@ -90,7 +91,7 @@ public class Player : MonoBehaviour
         if (score >= 60)
         {
             Debug.Log("Level avklarad!");
-            SceneManager.LoadScene("Meny"); // Byt ut med namnet på din scen
+            SceneManager.LoadScene("Victory"); // Byt ut med namnet på din scen
         }
     }
 

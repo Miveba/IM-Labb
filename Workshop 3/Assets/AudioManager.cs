@@ -64,4 +64,5 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = volume;
         audioSource.PlayOneShot(soundClip4); // Spela upp ljudklippet
     }
+
 }
