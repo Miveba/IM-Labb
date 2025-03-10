@@ -2,7 +2,13 @@
 
 public class GroundMonsterAI : MonsterAI
 {
-    private AudioManager m_AudioManager;
+    private MonstergGrowl m_AudioManager;
+
+    private void Start()
+    {
+        m_AudioManager = FindObjectOfType<MonstergGrowl>();
+        m_AudioManager.MonsterMove(1, 1);
+    }
     protected override void Move(Vector3 direction)
     {
         // Låt monstret röra sig, men behåll Y-positionen oförändrad
@@ -11,6 +17,5 @@ public class GroundMonsterAI : MonsterAI
 
         transform.position = newPosition;
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-        m_AudioManager.MonsterMove(1, 1);
     }
 }

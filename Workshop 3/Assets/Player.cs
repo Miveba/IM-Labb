@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
 
     private void RaycastCheck()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.forward * raycastDistance, Color.red);
 

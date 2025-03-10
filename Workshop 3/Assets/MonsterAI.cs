@@ -26,6 +26,7 @@ public class MonsterAI : MonoBehaviour
 
     protected virtual void Move(Vector3 direction)
     {
+        manager = FindObjectOfType<AudioManager>();
         transform.position += direction * speed * Time.deltaTime;
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
         manager.Monster(2f, 2f);

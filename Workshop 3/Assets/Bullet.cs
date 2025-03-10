@@ -9,6 +9,9 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
+        // Hämta AudioManager från en GameObject i scenen (justera efter ditt objekt)
+        audioManager = FindObjectOfType<AudioManager>();
+
         // Hämta Player-skriptet från Main Camera
         player = Camera.main.GetComponent<Player>();
 
@@ -17,15 +20,22 @@ public class Bullet : MonoBehaviour
         {
             // Applicera en kraft framåt i den riktning objektet är roterat (transform.forward)
             rb.linearVelocity = transform.forward * speed;
-            audioManager.BulletSound(1,1);
+
+            // Spela ljud om AudioManager finns
+            if (audioManager != null)
+            {
+                audioManager.BulletSound(1, 1);
+            }
         }
 
         Destroy(gameObject, lifeTime); // Förstör kulan efter en viss tid
     }
 
+
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy1") || other.CompareTag("Enemy2")) // Om vi träffar ett fiendeobjekt
+        audioManager = FindObjectOfType<AudioManager>();
+        if (other.CompareTag("Enemy1") || other.CompareTag("Enemy2")) // Om vi träffar ett fiendeobjekt
         {    
             Destroy(other.gameObject); // Förstör fienden
             Destroy(gameObject);       // Förstör kulan
