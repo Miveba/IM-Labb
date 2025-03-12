@@ -95,15 +95,12 @@ public class DrivingSurfaceManager : MonoBehaviour
         }
     }
 
-    public void ExpandLockedPlane(float newSize = 100f)
-    {
-        if (LockedPlane == null) return;
+    public void ExpandLockedPlane(float scaleFactor = 10f)
+{
+    if (LockedPlane == null) return;
 
-        // Försök att ändra storleken på planet genom att justera dess MeshRenderer
-        var planeMesh = LockedPlane.GetComponent<MeshRenderer>();
-        if (planeMesh != null)
-        {
-            planeMesh.transform.localScale = new Vector3(newSize, 1, newSize); // Skala upp
-        }
-    }
+    // Skala upp planet visuellt
+    LockedPlane.transform.localScale = Vector3.one * scaleFactor;
+}
+
 }

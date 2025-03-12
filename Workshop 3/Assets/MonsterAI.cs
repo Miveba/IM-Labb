@@ -2,7 +2,7 @@
 
 public class MonsterAI : MonoBehaviour
 {
-    protected float speed = 2f; // Hastighet på monstret
+    protected float speed = 1f; // Hastighet på monstret
 
     protected Transform player; // Spelaren (AR-kameran)
 
