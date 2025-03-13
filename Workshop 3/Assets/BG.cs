@@ -6,7 +6,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
 
     void Start()
     {
-        // Hitta AudioSource-komponenten pÂ detta GameObject
+        // Hitta AudioSource-komponenten pÅEdetta GameObject
         audioSource = GetComponent<AudioSource>();
 
         // Om audioSource inte ‰r null, spela ljudet
@@ -17,7 +17,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Ingen AudioSource hittades pÂ detta GameObject.");
+            Debug.LogError("Ingen AudioSource hittades pÅEdetta GameObject.");
         }
     }
 }

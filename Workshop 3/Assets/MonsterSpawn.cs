@@ -12,7 +12,7 @@ public class MonsterSpawner : MonoBehaviour
     private List<ARPlane> spawnedPlanes = new List<ARPlane>(); // Håller koll på plan som redan har monster
     private bool monstersSpawned = false; // Håller koll på om monster redan spawnats
 
-    private float minSpawnDistance = 0.5f; // Minsta avstånd mellan monster vid spawn
+    private float minSpawnDistance = 0.3f; // Minsta avstånd mellan monster vid spawn
 
     private List<Vector3> spawnedMonsterPositions = new List<Vector3>(); // Håller koll på spawnade monsterpositioner
 
@@ -81,7 +81,7 @@ public class MonsterSpawner : MonoBehaviour
                     monster.transform.SetParent(plane.transform); // Sätt planet som förälder
                     spawnedMonsterPositions.Add(spawnPosition); // Lägg till positionen i listan
                 }
-                yield return new WaitForSeconds(1f); // Fördröjning på 1 sekund mellan varje spawn
+                yield return new WaitForSeconds(2f); // Fördröjning på 1 sekund mellan varje spawn
             }
         }
     }

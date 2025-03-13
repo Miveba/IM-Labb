@@ -1,24 +1,24 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class Tutorial : MonoBehaviour
 {
     public TMP_Text instructionText;  // Referens till textkomponenten
-    private int currentStep = 0;  // Håller reda på vilket steg vi är på
-    private float stepDuration = 10f;  // Antal sekunder varje steg visas
-    private float timer;  // Timer för att byta steg
+    private int currentStep = 0;  // Hè™±ler reda pãƒ»vilket steg vi èˆ pãƒ»
+    private float stepDuration = 4f;  // Antal sekunder varje steg visas
+    private float timer;  // Timer fî’š att byta steg
     private string[] instructions = {
         "Steg 1: Ha bra belyst rum, tracka sedan ett plan genom att rikta enheten mot golvet.",
-        "Steg 2: Rikta kameran mot en bild på ett jordklot för att få ditt vapen",
-        "Steg 3: Sikta och skjut på monstrerna.",
+        "Steg 2: Rikta kameran mot en bild pÃ¥ ett jordklot fÃ¶r att fÃ¥ ditt vapen",
+        "Steg 3: Sikta och skjut pÃ¥ monstrerna.",
         "Lycka till!!"
     };
 
     void Start()
     {
-        ShowInstruction(currentStep);  // Visa första instruktionen
-        timer = stepDuration;  // Starta timer för första steget
+        ShowInstruction(currentStep);  // Visa fî’šsta instruktionen
+        timer = stepDuration;  // Starta timer fî’š fî’šsta steget
     }
 
     void Update()
@@ -26,18 +26,18 @@ public class Tutorial : MonoBehaviour
         // Uppdatera timer varje frame
         timer -= Time.deltaTime;
 
-        // När timern når 0, gå vidare till nästa steg
+        // Nèˆ timern nèšŒ 0, gãƒ»vidare till nèˆ–ta steg
         if (timer <= 0f)
         {
             currentStep++;
             if (currentStep < instructions.Length)
             {
                 ShowInstruction(currentStep);
-                timer = stepDuration;  // Nollställ timer för nästa steg
+                timer = stepDuration;  // Nollstèˆl timer fî’š nèˆ–ta steg
             }
             else
             {
-                // Om alla steg är slutförda, ta bort texten
+                // Om alla steg èˆ slutfî’šda, ta bort texten
                 HideInstruction();
             }
         }
@@ -45,13 +45,13 @@ public class Tutorial : MonoBehaviour
 
     void ShowInstruction(int step)
     {
-        // Visa instruktion baserat på det aktuella steget
+        // Visa instruktion baserat pãƒ»det aktuella steget
         instructionText.text = instructions[step];
     }
 
     void HideInstruction()
     {
-        // Ta bort texten när alla instruktioner är klara
+        // Ta bort texten nèˆ alla instruktioner èˆ klara
         instructionText.text = "";
     }
 }

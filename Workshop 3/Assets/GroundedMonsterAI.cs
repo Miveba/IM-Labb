@@ -2,13 +2,12 @@
 
 public class GroundMonsterAI : MonsterAI
 {
-    private MonstergGrowl m_AudioManager;
 
     private void Start()
     {
-        m_AudioManager = FindObjectOfType<MonstergGrowl>();
-        m_AudioManager.MonsterMove(1, 1);
+        base.Start(); // Se till att player sätts 
     }
+
     protected override void Move(Vector3 direction)
     {
         // Låt monstret röra sig, men behåll Y-positionen oförändrad

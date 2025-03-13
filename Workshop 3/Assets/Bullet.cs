@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float speed = 10f;    // Hastigheten som kulan ska röra sig med
+    private float speed = 15f;    // Hastigheten som kulan ska röra sig med
     private float lifeTime = 5f;  // Hur länge kulan ska existera innan den förstörs
     private Player player;       // Player-referens
     private AudioManager audioManager;

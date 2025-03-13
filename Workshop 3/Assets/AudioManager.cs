@@ -42,7 +42,6 @@ public class AudioManager : MonoBehaviour
     }
 
 
-
     public void Monster(float pitch = 1.0f, float volume = 1.0f)
     {
         // Sätt pitch och volume innan vi spelar upp ljudet
