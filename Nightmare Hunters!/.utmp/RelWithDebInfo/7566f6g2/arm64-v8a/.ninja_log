@@ -1,0 +1,10 @@
+# ninja log v5
+23	1465	7637384219787292	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	bbde113ca5daa57f
+6	1471	7637384219897317	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	b926316e5c01ad0e
+49	1493	7637384220167681	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	193999a0b359aa84
+18	1534	7637384220601790	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	c877290dc41ec0fb
+42	1563	7637384220877014	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6ce3cd22d7c79dd9
+1	1600	7637384221272671	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	8e707b477e4c108f
+30	1738	7637384222661259	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	e047bd551fcab00f
+12	1838	7637384223632491	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	a2cb74063e83edd
+1838	1926	7637384224576096	C:/Users/Bruh/Documents/GitHub/IM-Labb/Nightmare Hunters!/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/7566f6g2/obj/arm64-v8a/libgame.so	9d917e1462ee8ad2

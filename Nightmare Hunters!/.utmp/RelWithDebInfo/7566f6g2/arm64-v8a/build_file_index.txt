@@ -1,0 +1,2 @@
+C:\Users\Bruh\Documents\GitHub\IM-Labb\Nightmare Hunters!\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\Bruh\Documents\GitHub\IM-Labb\Nightmare Hunters!\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
